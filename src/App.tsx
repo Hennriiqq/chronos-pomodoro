@@ -5,7 +5,7 @@ import { Heading } from './components/Heading';
 export function App() {
   return (
     <>
-      <Heading />
+      <Heading> Olá Mundo! </Heading>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos odit
         consequuntur repellat assumenda dolorum soluta magni cumque voluptatum!
