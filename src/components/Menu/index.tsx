@@ -13,6 +13,11 @@ export function Menu() {
     event.preventDefault(); // Não segue o link
 
     console.log('Clicado', Date.now());
+
+    setTheme(prevTheme => {
+      const nexthTheme = prevTheme === 'dark' ? 'light' : 'dark';
+      return nexthTheme;
+    });
   }
   return (
     <nav className={styles.menu}>
