@@ -8,7 +8,7 @@ import type { TaskStateModel } from './models/taskStateModel';
 const initilState: TaskStateModel = {
   tasks: [],
   secondsRemaining: 0,
-  formattedSecondsRemaining: '10:00',
+  formattedSecondsRemaining: '00:00',
   activeTask: null,
   currentCycle: 0,
   config: {
@@ -21,5 +21,5 @@ const initilState: TaskStateModel = {
 export function App() {
   const [state, setState] = useState(initilState);
 
-  return <Home state={state} setState={setState} />;
+  return <Home />;
 }
