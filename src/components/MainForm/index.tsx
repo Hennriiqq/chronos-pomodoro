@@ -78,7 +78,23 @@ export function MainForm() {
       )}
 
       <div className='formRow'>
-        <DefaultButton icon={<PlayCircleIcon />} color='green' />
+        {!state.activeTask ? (
+          <DefaultButton
+            aria-label='Iniciar nova Tarefa'
+            title='iniciar nova Tarefa'
+            type='submit'
+            color='green'
+            icon={<PlayCircleIcon />}
+          />
+        ) : (
+          <DefaultButton
+            aria-label='Interroper tarefa Atual'
+            title='Interroper tarefa Atual'
+            type='button'
+            color='red'
+            icon={<PlayCircleIcon />}
+          />
+        )}
       </div>
     </form>
   );
