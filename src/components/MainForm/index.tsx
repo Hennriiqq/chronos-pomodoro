@@ -54,6 +54,17 @@ export function MainForm() {
     });
   }
 
+  function handleInterruptTask() {
+    setState(prevState => {
+      return {
+        ...prevState,
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: '00:00',
+      };
+    });
+  }
+
   return (
     <form onSubmit={handleCreatNewTask} className='form' action=''>
       <div className='formRow'>
@@ -85,6 +96,7 @@ export function MainForm() {
             type='submit'
             color='green'
             icon={<PlayCircleIcon />}
+            key={'enviar'}
           />
         ) : (
           <DefaultButton
@@ -93,6 +105,8 @@ export function MainForm() {
             type='button'
             color='red'
             icon={<PlayCircleIcon />}
+            onClick={handleInterruptTask}
+            key={'interromper'}
           />
         )}
       </div>
