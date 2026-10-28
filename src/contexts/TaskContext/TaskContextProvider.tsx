@@ -14,14 +14,11 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
   const [state, dispatch] = useReducer(taskReducer, initialTaskState);
   const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
 
-  console.log(state);
-
   const worker = TimerWorkerManager.getInstance();
 
   useEffect(() => {
     worker.onmessage(e => {
       const countDownSeconds = e.data;
-      console.log(countDownSeconds);
 
       if (countDownSeconds <= 0) {
         if (playBeepRef.current) {
@@ -42,12 +39,11 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
   });
 
   useEffect(() => {
-    const worker = TimerWorkerManager.getInstance();
-
     if (!state.activeTask) {
-      console.log('Worker terminado por falta de activeTask');
       worker.terminate();
     }
+
+    document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`;
 
     worker.postMessage(state);
   }, [state]);
