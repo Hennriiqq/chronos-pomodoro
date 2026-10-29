@@ -5,45 +5,14 @@ import { Heading } from '../../components/Heading';
 import { MainTemplate } from '../../templates/MainTemplate';
 
 import styles from './styles.module.css';
-
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { formatDate } from '../../utils/formatDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
-import { TaskActionTypes } from '../../contexts/TaskContext/TaskActions';
-import { sortTasks, type SortTasksOptions } from '../../utils/sortTasks';
-import { useState } from 'react';
+import { sortTasks } from '../../utils/sortTasks';
 
 export function History() {
-  const { state, dispatch } = useTaskContext();
-  const [sortTasksOptions, setSortTaskOptions] = useState<SortTasksOptions>(
-    () => {
-      return {
-        tasks: sortTasks({ tasks: state.tasks }),
-        field: 'startDate',
-        direction: 'desc',
-      };
-    },
-  );
-
-  function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
-    const newDirection = sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';
-
-    setSortTaskOptions({
-      tasks: sortTasks({
-        direction: newDirection,
-        tasks: sortTasksOptions.tasks,
-        field,
-      }),
-      direction: newDirection,
-      field,
-    });
-  }
-
-  function handleResetHistory() {
-    if (!confirm('tem certeza?')) return;
-
-    dispatch({ type: TaskActionTypes.RESET_STATE });
-  }
+  const { state } = useTaskContext();
+  const sortedTasks = sortTasks({ tasks: state.tasks });
 
   return (
     <MainTemplate>
@@ -56,7 +25,6 @@ export function History() {
               color='red'
               aria-label='Apagar todo o histórico'
               title='Apagar histórico'
-              onClick={handleResetHistory}
             />
           </span>
         </Heading>
@@ -67,31 +35,16 @@ export function History() {
           <table>
             <thead>
               <tr>
-                <th
-                  onClick={() => handleSortTasks({ field: 'name' })}
-                  className={styles.thSort}
-                >
-                  Tarefa ↕
-                </th>
-                <th
-                  onClick={() => handleSortTasks({ field: 'duration' })}
-                  className={styles.thSort}
-                >
-                  Duração ↕
-                </th>
-                <th
-                  onClick={() => handleSortTasks({ field: 'startDate' })}
-                  className={styles.thSort}
-                >
-                  Data ↕
-                </th>
+                <th>Tarefa</th>
+                <th>Duração</th>
+                <th>Data</th>
                 <th>Status</th>
                 <th>Tipo</th>
               </tr>
             </thead>
 
             <tbody>
-              {sortTasksOptions.tasks.map(task => {
+              {sortedTasks.map(task => {
                 const taskTypeDictionary = {
                   worktime: 'Foco',
                   shortBreakTime: 'Descanso Curto',
