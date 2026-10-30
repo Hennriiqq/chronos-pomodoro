@@ -7,10 +7,11 @@ import { MainTemplate } from '../../templates/MainTemplate';
 import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { messageToastify } from '../../adapters/messageToastify';
+import { TaskActionTypes } from '../../contexts/TaskContext/TaskActions';
 
 export function Settings() {
-  const { state } = useTaskContext();
-  const workTimeInput = useRef<HTMLInputElement>(null);
+  const { state, dispatch } = useTaskContext();
+  const worktimeInput = useRef<HTMLInputElement>(null);
   const shortBreakInput = useRef<HTMLInputElement>(null);
   const longBreakInput = useRef<HTMLInputElement>(null);
 
@@ -21,15 +22,15 @@ export function Settings() {
 
     const formErrors = [];
 
-    const workTime = Number(workTimeInput.current?.value);
+    const worktime = Number(worktimeInput.current?.value);
     const shortBreakTime = Number(shortBreakInput.current?.value);
     const longBreakTime = Number(longBreakInput.current?.value);
 
-    if (isNaN(workTime) || isNaN(shortBreakTime) || isNaN(longBreakTime)) {
+    if (isNaN(worktime) || isNaN(shortBreakTime) || isNaN(longBreakTime)) {
       formErrors.push('Digite apenas números para TODOS os campos');
     }
 
-    if (workTime < 1 || workTime > 99) {
+    if (worktime < 1 || worktime > 99) {
       formErrors.push('Digite valores entre 1 e 99 para foco');
     }
 
@@ -47,6 +48,16 @@ export function Settings() {
       });
       return;
     }
+
+    dispatch({
+      type: TaskActionTypes.CHANGE_SETTINGS,
+      payload: {
+        worktime,
+        shortBreakTime,
+        longBreakTime,
+      },
+    });
+    messageToastify.success('Configurações salvas');
   }
 
   return (
@@ -62,9 +73,9 @@ export function Settings() {
         <form onSubmit={handleSaveSettings} action='' className='form'>
           <div className='formRow'>
             <DefaultInput
-              id='workTime'
+              id='worktime'
               labelText='Foco'
-              ref={workTimeInput}
+              ref={worktimeInput}
               defaultValue={state.config.worktime}
               type='number'
             />
