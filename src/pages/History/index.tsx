@@ -14,6 +14,10 @@ import { TaskActionTypes } from '../../contexts/TaskContext/TaskActions';
 import { messageToastify } from '../../adapters/messageToastify';
 
 export function History() {
+  useEffect(() => {
+    document.title = 'Histórico - Chronos Pomodoro';
+  }, []);
+
   const { state, dispatch } = useTaskContext();
   const [confirmClearHistory, setConfirmClearHistory] = useState(false);
 
