@@ -67,9 +67,12 @@ export function Settings() {
   return (
     <MainTemplate>
       <Container>
+        <h1 style={{ textAlign: 'center', paddingBottom: 40 }}>
+          Configurações
+        </h1>
         <p style={{ textAlign: 'center' }}>
-          Modifique as configurações para tempo de foco, descanso curso e
-          descanso longo.
+          Modifique as configurações para tempo de Foco, Descanso Curto e
+          Descanso Longo.
         </p>
       </Container>
 

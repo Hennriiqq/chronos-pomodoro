@@ -14,7 +14,7 @@ export function AboutPomodoro() {
     <MainTemplate>
       <Container>
         <GenericHtml>
-          <Heading>A Técnica Pomodoro 🍅</Heading>
+          <Heading>A Técnica Pomodoro 💜</Heading>
 
           <p>
             A Técnica Pomodoro é uma metodologia de produtividade criada por{' '}
@@ -23,8 +23,6 @@ export function AboutPomodoro() {
             com pausas. O objetivo é manter o foco total por um período curto e
             garantir descansos para evitar o cansaço mental.
           </p>
-
-          <img src='https://placehold.co/1920x1080' alt='' />
 
           <h2>Como funciona o Pomodoro tradicional?</h2>
           <ul>
@@ -82,7 +80,7 @@ export function AboutPomodoro() {
             </li>
           </ul>
 
-          <h3>🍅 Visualização dos ciclos</h3>
+          <h3>⏱️ Visualização dos ciclos</h3>
           <p>
             Logo abaixo do cronômetro, você verá bolinhas coloridas
             representando os ciclos:

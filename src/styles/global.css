@@ -22,7 +22,10 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-size: 1.6rem; /* 16px */
-  background: var(--gray-900);
+  min-height: 100vh;
+  background: linear-gradient(163deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--text-default);
   margin: 0 auto;
 }
